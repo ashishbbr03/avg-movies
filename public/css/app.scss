@@ -1,0 +1,128 @@
+
+/*  bhoechie tab */
+div.bhoechie-tab-container{
+  z-index: 10;
+  background-color: #ffffff;
+  padding: 0 !important;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  border:1px solid #ddd;
+  margin-top: 20px;
+  margin-left: 50px;
+  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  -moz-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  background-clip: padding-box;
+  opacity: 0.97;
+  filter: alpha(opacity=97);
+}
+div.bhoechie-tab-menu{
+  padding-right: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+}
+div.bhoechie-tab-menu div.list-group{
+  margin-bottom: 0;
+}
+div.bhoechie-tab-menu div.list-group>a{
+  margin-bottom: 0;
+}
+div.bhoechie-tab-menu div.list-group>a .glyphicon,
+div.bhoechie-tab-menu div.list-group>a .fa {
+  color: #5A7DFC;
+}
+.bhoechie-tab-container{
+  width: 100%;
+}
+div.bhoechie-tab-menu div.list-group>a:first-child{
+  border-top-right-radius: 0;
+  -moz-border-top-right-radius: 0;
+}
+div.bhoechie-tab-menu div.list-group>a:last-child{
+  border-bottom-right-radius: 0;
+  -moz-border-bottom-right-radius: 0;
+}
+div.bhoechie-tab-menu div.list-group>a.active,
+div.bhoechie-tab-menu div.list-group>a.active .glyphicon,
+div.bhoechie-tab-menu div.list-group>a.active .fa{
+  background-color: #83E5F9;
+  background-image: #83E5F9;
+  color: #ffffff;
+}
+div.bhoechie-tab-menu div.list-group>a.active:after{
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  margin-top: -13px;
+  border-left: 0;
+  border-bottom: 13px solid transparent;
+  border-top: 13px solid transparent;
+  border-left: 10px solid #83E5F9;
+}
+
+div.bhoechie-tab-content{
+  background-color: #ffffff;
+  /* border: 1px solid #eeeeee; */
+  padding-left: 20px;
+  padding-top: 10px;
+}
+
+div.bhoechie-tab div.bhoechie-tab-content:not(.active){
+  display: none;
+}
+
+
+
+.movies-container {
+    height: 230px;
+    width: 230px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.movie-poster {
+    height: 150px;
+    width: 150px;
+    display: block;
+}
+
+.movie-title {
+    display: block;
+}
+
+.movie-director {
+    display: block;
+}
+
+.book {
+    width: 150px !important;
+}
+
+.movies-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+
+.fgm-movie-align {
+    margin-bottom: 20px;
+}
+
+.filter-movies {
+    margin-bottom: 40px;
+}
+
+.navbar-fixed-top {
+    background-color: #83E5F9;
+    border-color: #83E5F9;
+
+}
+
+.navbar-fixed-top .navbar-brand {
+    color: white;
+}
+
+.navbar-fixed-top .navbar-nav > li > a {
+  color: white;
+    }

@@ -1,0 +1,187 @@
+<div class="container">
+	<div class="row">
+    <div class="col-lg-5 col-md-5 col-sm-8 col-xs-9 bhoechie-tab-container">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
+          <div class="list-group">
+            <a href="#" class="list-group-item active text-center">
+              CITY
+            </a>
+            <a href="#" class="list-group-item text-center">
+              THEATRE
+            </a>
+            <a href="#" class="list-group-item text-center">
+              DATES
+            </a>
+            <a href="#" class="list-group-item text-center">
+             TIMING
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
+            <div class="bhoechie-tab-content active">
+
+                    <center>
+                      <table class="table">
+							            <thead>
+							                <tr>
+							                    <th>CITY</th>
+							                    <th>STATE</th>
+							                </tr>
+							            </thead>
+							            <tbody>
+							                <tr>
+							                 <td><input ng-model="city.cityID" /></td>
+							                    <td><input ng-model="city.cityName" /></td>
+																	<!-- <td><select ng-model="city.city" >
+							                    	 <option ng-repeat="city in cityList" ng-value="city.cityName">{{city.cityName}}</option>
+							                    	</select></td> -->
+							                    <td><button ng-click="addData(city)" class="btn btn-info">Add City</button></td>
+							                    <td><button ng-click="updateData(city)" class="btn btn-info">Update</button></td>
+
+							                </tr>
+							                <tr ng-repeat=" city in cityList">
+							                    <td>{{city.cityID}}</td>
+																	<td>{{city.cityName}}</td>
+							                    <td><button ng-click="deleteData(city)" class="btn btn-danger">Remove</button></td>
+							                    <td><button ng-click="editData(city)" class="btn btn-info">Edit</button></td>
+							                </tr>
+							            </tbody>
+							 </table>
+			                    </center>
+                        </div>
+
+                        <div class="bhoechie-tab-content">
+
+
+			                    <center>
+			                      <table class="table">
+							            <thead>
+							                <tr>
+							                    <th>THEATRE</th>
+							                    <th>LOCATION</th>
+																	<th>CITY</th>
+
+							                </tr>
+							            </thead>
+							            <tbody>
+							                <tr>
+							                 <td><input ng-model="thtr.thtrID" /></td>
+							                    <td><input ng-model="thtr.thtrName" /></td>
+																	<td><select ng-model="thtr.cityName">
+																		 <option ng-repeat="city in cityList" ng-value="thtr.cityID">{{city.cityID}}</option>
+																		</select></td>
+
+							                    <td><button ng-click="addData(thtr)" class="btn btn-info">Add Theatre & City Both</button></td>
+							                    <td><button ng-click="updateData(thtr)" class="btn btn-info">Update</button></td>
+
+							                </tr>
+							                <tr ng-repeat=" thtr in thtrList">
+							                    <td>{{thtr.thtrID}}</td>
+							                    <td>{{thtr.thtrName}}</td>
+																	<td>{{thtr.cityName}}</td>
+																	<td><button ng-click="deleteData(thtr)" class="btn btn-danger">Remove</button></td>
+							                    <td><button ng-click="editData(thtr)" class="btn btn-info">Edit</button></td>
+							                </tr>
+
+							            </tbody>
+							 </table>
+                    </center>
+                  </div>
+
+
+
+                  <div class="bhoechie-tab-content">
+
+										<center>
+												<table class="table">
+											<thead>
+													<tr>
+															<th>DATE</th>
+															<th>MOVIE</th>
+
+													</tr>
+											</thead>
+										<tbody>
+												<tr>
+													<td><input type="text" id="datepicker" ng-model="assm.assmID" /></td>
+
+
+															<td><select ng-model="assm.moviTitle">
+																 <option ng-repeat="movi in movieList" ng-value="assm.moviTitle">{{movi.moviTitle}}</option>
+																</select></td>
+
+
+
+														<td><button ng-click="addData(assm)" class="btn btn-info">Add</button></td>
+														<td><button ng-click="updateData(assm)" class="btn btn-info">Update</button></td>
+
+												</tr>
+												<tr ng-repeat=" assm in assmList">
+														<td>{{assm.assmID}}</td>
+														<td>{{assm.moviTitle}}</td>
+
+														<td><button ng-click="deleteData(assm)" class="btn btn-danger">Remove</button></td>
+														<td><button ng-click="editData(assm)" class="btn btn-info">Edit</button></td>
+												</tr>
+
+										</tbody>
+										</table>
+										</center>
+                  </div>
+
+
+
+                  <div class="bhoechie-tab-content">
+
+										<center>
+											<table class="table">
+										<thead>
+												<tr>
+														<th>TIME</th>
+														<th>DATE</th>
+														<th>MOVIE</th>
+														<th>THEATRE</th>
+
+												</tr>
+										</thead>
+										<tbody>
+												<tr>
+												 <td><input ng-model="time.timeID" /></td>
+														<td><select ng-model="time.assmID">
+															 <option ng-repeat="assm in assmList" ng-value="time.assmID">{{assm.assmID}}</option>
+														 </select></td>
+
+																<td><select ng-model="time.moviTitle">
+																	 <option ng-repeat="movi in movieList" ng-value="time.moviTitle">{{movi.moviTitle}}</option>
+																	</select></td>
+
+																<td><select ng-model="time.thtrID">
+																	 <option ng-repeat="thtr in thtrList" ng-value="time.thtrID">{{thtr.thtrID}}</option>
+																	</select></td>
+
+
+
+														<td><button ng-click="addData(time)" class="btn btn-info">Add</button></td>
+														<td><button ng-click="updateData(time)" class="btn btn-info">Update</button></td>
+
+												</tr>
+												<tr ng-repeat=" time in timeList">
+													<td>{{time.timeID}}</td>
+													<td>{{time.assmID}}</td>
+													<td>{{time.moviTitle}}</td>
+													<td>{{time.thtrID}}</td>
+														<td><button ng-click="deleteData(time)" class="btn btn-danger">Remove</button></td>
+														<td><button ng-click="editData(time)" class="btn btn-info">Edit</button></td>
+												</tr>
+
+										</tbody>
+				 </table>
+							</center>
+              </div>
+
+
+
+                </div>
+            </div>
+</div>
+</div>
