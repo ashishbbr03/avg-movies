@@ -1,39 +1,52 @@
-
 var express = require('express');
 var router = express.Router();
 bodyParser = require('body-parser'), //parses information from POST
 
-
-//Any requests to this controller must pass through this 'use' function
-//Copy and pasted from method-override
 router.use(bodyParser.urlencoded({ extended: true }))
 
-
 var mongoose = require('mongoose');
+//var dbHost = 'mongodb://localhost:27017/test';
+//mongoose.connect(dbHost);
 
 var movieSchema = mongoose.Schema({
+     ID: String,
+    Title: String,
+    Year:String,
+    Language:String,
+    Poster:String,
+    Genre:String,
+    Director:String,
+    Actors:String,
+     Plot:String,
+      avg:String
 
-  moviTitle: String,
-  moviLanguage: String,
-  moviGenre: String,
-  moviimdbRating: String,
-  moviPoster: String,
-  moviDirector: String,
-  moviActors: String
+    });
 
- });
 var Movie = mongoose.model('Movie', movieSchema, 'movie');
 
-//Movie
-router.get('/getMovie', function (req, res) {
-    console.log("REACHED GET FUNCTION ON SERVER");
-    Movie.find({}, function (err, docs) {
+router.get('/movie/getData/', function (req, res,next) {
+
+    console.log("REACHED  GET omdb FUNCTION ON SERVER");
+    Movie.find({}, function (err, docs)
+    {
          res.json(docs);
+         console.log(docs);
 
     });
 });
 
-router.get('/getMovie/:id', function (req, res) {
+
+router.get('/movie', function (req, res,next) {
+    console.log("REACHED GET FUNCTION ON SERVER");
+
+    Movie.find({}, function (err, docs) {
+         res.json(docs);
+         console.log(docs);
+
+    });
+});
+
+router.get('/movie/:id', function (req, res) {
     console.log("REACHED GET ID FUNCTION ON SERVER");
      Movie.find({_id: req.params.id}, function (err, docs) {
          res.json(docs);
@@ -41,28 +54,37 @@ router.get('/getMovie/:id', function (req, res) {
     });
 });
 
-router.post('/addMovie', function(req, res){
- console.log(req.body);
-
-
-  var title = req.body.Title;
-  var language = req.body.Language;
-  var genre = req.body.Genre;
-  var imdbRating = req.body.imdbRating;
-  var poster = req.body.Poster;
-  var director = req.body.Director;
-  var actors = req.body.Actors;
-
-  var movie = new Movie({
-
-    moviTitle: title,
-    moviLanguage: language,
-    moviGenre: genre,
-    moviimdbRating: imdbRating,
-    moviPoster: poster,
-    moviDirector: director,
-    moviActors: actors
+router.post('/movie', function(req, res){
+  console.log(req.body);
+    var id=req.body.ID;
+    var title = req.body.Title;
+    var year=req.body.Year;
+    var lang = req.body.Language;
+    var poster = req.body.Poster;
+    var genre = req.body.Genre;
+    var dir=req.body.Director;
+    var act=req.body.Actors;
+     var desc=req.body.Plot;
+     var r=req.body.avg;
+   // //  var imdb=req.body.imdbRating;
+   //  // var rates=req.body.Rating;
+   //   var avg=req.body.AvgRating;
+   var movie = new Movie({
+    ID:id,
+    Title:title,
+    Year:year,
+    Language:lang,
+    Poster:poster,
+    Genre:genre,
+    Director:dir,
+    Actors:act,
+     Plot:desc,
+     avg:r,
+     //imdbRating:imdb,
+    // Rating:rates,
+     //AvgRating:avg,
   });
+
 
   movie.save(function(err, docs){
     if ( err ) throw err;
@@ -70,31 +92,30 @@ router.post('/addMovie', function(req, res){
     res.json(docs);
   });
 
-
   })
 
-router.delete('/deleteMovie/:id', function(req, res){
+
+
+router.delete('/movie/:id', function(req, res){
    console.log("REACHED Delete FUNCTION ON SERVER");
       Movie.remove({_id:req.params.id}, function(err, docs){
         res.json(docs);
     });
 })
 
-router.put('/updateMovie/:id', function(req, res){
-    console.log("REACHED PUT");
+router.put('/movie/:id', function(req, res){
+    console.log("REACHED updation ");
     console.log(req.body);
     Movie.findOneAndUpdate({_id:req.params.id}, req.body, function (err, data) {
-      console.log(data);
       res.json(data);
     });
 })
 
-
-// catch 404 and forward to error handler
 router.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
+
 
 module.exports = router;

@@ -1,0 +1,299 @@
+<!-- 
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <img src="../resources/images/banner1.jpg" width="1080px" />
+    </div>
+  </div>
+  <br/>
+
+  <br/>
+  <div class="row">
+    <div class="col-md-3" ng-repeat="movie in movieObj | filter: {'Status':true}">
+      <a href="#"><img width="180" height="240" src={{movie.Poster}}></a>
+      <div class="bookDetailsTab"><p>{{movie.Title}}</p>Rating - <span class="label label-success"> 4.0</span></div>
+      <a href="#" style="text-decoration: none" ng-click="ShowDialog(movie)"><div class="bookTab">Rate Movie</div></a>
+      <hr/>
+    </div>
+  </div>
+
+  <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <!-- <h3 style="margin-left: 50px">Your are logged in as {{$ctrl.getCurrentUser().name}}</h3> -->
+              <br/>
+              <div class="o-content">
+                <div class="o-container">
+                  <div class="o-section">
+                    <div id="shop"></div>
+                  </div>
+                  <div class="o-section">
+                    <div id="github-icons"></div>
+                  </div>
+                </div>
+              </div >
+            </div>
+            <div class="modal-footer" style="text-align:center">
+              <button id="submitRatingButton" type="button" ng-click="saveRating()" class="btn btn-success" data-dismiss="modal">Submit Rating</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+<script>
+(function(){
+
+class MoviesratingComponent {
+  constructor($http, $scope, socket, Auth) {
+    this.$http = $http;
+    this.socket = socket;
+    this.message = 'Hello';
+    this.myMovies = [];
+    this.rating = [];
+    this.getCurrentUser = Auth.getCurrentUser;
+  }
+
+  ShowDialog(Movies){
+    $('#myModal').modal('show');
+    sessionStorage.setItem('RatingMovieName',Movies.Title);
+  }
+
+  $onInit() {
+    this.$http.get('/api/movieendpoints')
+      .then(response => {
+        this.myMovies = response.data;
+        this.socket.syncUpdates('movieendpoint', this.myMovies);
+    });
+    this.$http.get('/api/ratingendpoints')
+      .then(response => {
+        this.rating = response.data[0].Rating;
+        this.socket.syncUpdates('ratingendpoint', this.rating);
+        console.log(this.rating);
+    });
+  }
+
+  saveRating() {
+        $('#myModal').modal('show');
+        this.$http.post('/api/ratingendpoints', {
+          UserName: this.getCurrentUser().name,
+          Email: this.getCurrentUser().email,
+          MovieName: sessionStorage.getItem('RatingMovieName'),
+          RatingDateTime: Date(),
+          Rating: window.rate
+    });
+  }
+}
+
+angular.module('meraFilmApp')
+  .component('moviesrating', {
+    templateUrl: 'app/moviesrating/moviesrating.html',
+    controller: MoviesratingComponent,
+    //controllerAs: Moviesrating
+  });
+
+})();
+  var rate=0;
+  (function() {
+    'use strict';
+    var shop = document.querySelector('#shop');
+    var data = [
+      {
+        rating: 0
+      },
+    ];
+    (function init() {
+      for (var i = 0; i < data.length; i++) {
+        addRatingWidget(buildShopItem(data[i]), data[i]);
+      }
+    })();
+    function buildShopItem(data) {
+      var shopItem = document.createElement('div');
+      var html = '<ul class="c-rating"></ul></div>';
+      shopItem.classList.add('c-shop-item');
+      shopItem.innerHTML = html;
+      shop.appendChild(shopItem);
+      return shopItem;
+    }
+    function addRatingWidget(shopItem, data) {
+      var ratingElement = shopItem.querySelector('.c-rating');
+      var currentRating = data.rating;
+      var maxRating = 5;
+      var callback = function(rating) { rate=parseInt(rating);};
+      var r = rating(ratingElement, currentRating, maxRating, callback);
+    }
+  })();
+</script>
+
+
+<!-- booking pg -->
+<!-- <span id="bookingid"></span> -->
+                <!-- <td><input  ng-model="bking.ID" /></td> -->
+                <!-- <td>{{moviebking.Title}}</td> -->
+                
+                <!-- <td><input type="text" ng-model="movie.Title"/></td> -->
+                <!-- <td><p ng-bind="movie"></p></td> -->
+                <!-- <td ng-bind=""><p><strong>{{showTitle()}}</strong></p></td> -->
+                <!-- <td><span ng-hide="editMode">{{ck.movieTitle}}</span></td> -->
+              <!-- <td><span ng-hide="editMode">{{ck.movieTitle}}</span></td> -->
+            <!-- <td><select ng-model="bking.mName" id="getMovieInfo">
+            <option  ng-repeat="moviess in movieObj">{{moviess.Title}}</option></select></td> -->
+
+            <!-- home page -->
+
+             <li>
+                      <a href="#/search">search</a>
+                    </li>
+                    <li>
+                      <a href="#/cancellation">cancel</a>
+                    </li>
+ <li id="admin-id"><a href="#/admin">Admin</a></li>
+
+                      <li><a href="#/login" id="log">Log In</a></li>
+                     <!-- <li style="margin-top: 3%;margin-left: 6px;"><div ng-controller="LogoutController">
+                        <a ng-click='logout()' style="background: none;color: white;">Logout</a> -->
+<li ><a href="#">Logout</a></li>
+                        </div></li>-->
+
+<!-- <div class="row">
+    <div class="col-md-12">
+    <div class="static-header-img">
+  <img class="banner-img" style="width:1250px;height:500px;" src="../resources/images/5.png"/>
+  </div>
+</div> -->
+
+<div>
+<figure class="highlight1"><p class="lead" style="margin-bottom: 2px;">Trailers</p></figure>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-3 thumbnail">
+<h5>Wagah</h5>
+ <button type="button" class="btn btn-info btn-lg img-trailer"  style="background: url(../resources/images/wagah-250.jpg);" data-toggle="modal" data-target="#myModal"></button>
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Wagah Trailer</h4>
+        </div>
+        <div class="modal-body">
+         <iframe  class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/jJ3GqF3POsM" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+        </div>
+        <div class="col-md-3 thumbnail">
+<h5>Joker</h5>
+ <button type="button" class="btn btn-info btn-lg img-trailer"  style="background: url(../resources/images/joker-250.jpg);" data-toggle="modal" data-target="#myModal"></button>
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Joker Trailer</h4>
+        </div>
+        <div class="modal-body">
+         <iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/4xr59w5r6Hw" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  </div>
+        <div class="col-md-3 thumbnail">
+<h5>Thirunaal</h5>
+ <button type="button" class="btn btn-info btn-lg img-trailer"  style="background: url(../resources/images/thirunaal250.jpg);" data-toggle="modal" data-target="#myModal"></button>
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Thirunaal Trailer</h4>
+        </div>
+        <div class="modal-body">
+         <iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/jJ3GqF3POsM" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+      
+    </div>  
+        </div>
+                                 <div class="col-md-3 thumbnail">
+<h5>Thodari</h5>
+ <button type="button" class="btn btn-info btn-lg img-trailer"  style="background: url(../resources/images/thodari250.jpg);" data-toggle="modal" data-target="#myModal"></button>
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Thodari Trailer</h4>
+        </div>
+        <div class="modal-body">
+         <iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/Gs3widGw6Tw" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container">
+  <div class="row content table">
+
+<table class="table col-xs-6 col-sm-4 col-md-3" ng-repeat="moviess in movieObj" >
+<!-- class="thumbnail caption" -->
+<tr>
+<!-- <span ng-hide="editMode"> -->
+
+<td ng-repeat="ck in cklist"></td>
+<td><h2 id="UserSelector"   style="margin-top: 70px;" ng-model="ck.movieTitle" >{{moviess.Title}}</h2></td>
+                  <td> <p class="lead" style="margin-top: 18px;" >{{moviess.Year}} {{moviess.Language}}</p></td>
+                  <td> <button ng-click="Booking()" class="btn btn-primary">Book</button></td>
+<td><button  class="btn btn-primary" ng-click="addreview(moviess)">Review</button></td>
+            <!--   <td>  <img src="{{moviess.Poster}}" style="width: 280px;height: 280px;" alt="..."></td> -->
+<!-- ng-click="Booking()"  -->
+
+
+</tr>
+</table>
+</div>
+</div> -->
+
+<!-- search ctrller -->
+// //   $scope.search = 'searchpage';
+
+// //   var refresh=function()
+// // {
+// //     $http.get('/search/search').success(function(response){
+// //         console.log('search box fun');
+// //         $scope.contactList=response;
+// //         $scope.contact="";
+// //     });
+// // };
+
+// //   $scope.editSearch = function (searchName) {
+// //          $http.get('/search/search/' + $scope.contact.searchName).success(function (response) {
+// //           //console.log(response);
+// //             $scope.contact = response[0];
+
+
+// //         });
+// //     };
+//     };

@@ -6,17 +6,17 @@ Theatre.$inject = ['$http'];
 function Theatre($http){
    var _this = this;
     _this.getTheatre = function () {
-        
+
          return $http({
             method: 'GET',
-            url: '/theatre/gettheatre',            
+            url: '/theatre/gettheatre',
         })
         .then(function(response) {
             console.log(response);
             return response.data;
         })
         .catch(function(error) {
-           
+
             throw error;
         });
     };
@@ -32,7 +32,7 @@ function Theatre($http){
         .then(function(response) {
             return response.data;
         })
-        .catch(function(error) {           
+        .catch(function(error) {
             throw error;
         });
     };
@@ -44,7 +44,7 @@ function Theatre($http){
         .then(function(response) {
             return response.data;
         })
-        .catch(function(error) {            
+        .catch(function(error) {
             throw error;
         });
     };
@@ -53,13 +53,13 @@ function Theatre($http){
         //console.log($scope.theatre);
           return $http({
             method: 'GET',
-            url: '/theatre/getTheatre/'+theatreID,            
+            url: '/theatre/getTheatre/'+theatreID,
         })
         .then(function(response) {
             return response.data;
         })
         .catch(function(error) {
-           
+
             throw error;
         });
     };
@@ -68,17 +68,16 @@ function Theatre($http){
         console.log(theatre);
           return $http({
             method: 'PUT',
-            url: '/theatre/updateTheatre/'+theatre._id,  
-            data: theatre          
+            url: '/theatre/updateTheatre/'+theatre._id,
+            data: theatre
         })
         .then(function(response) {
             return response.data;
         })
         .catch(function(error) {
-           
+
             throw error;
         });
     };
 }
 module.exports = Theatre;
-   
