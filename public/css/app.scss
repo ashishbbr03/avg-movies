@@ -29,7 +29,7 @@ div.bhoechie-tab-menu div.list-group>a{
 }
 div.bhoechie-tab-menu div.list-group>a .glyphicon,
 div.bhoechie-tab-menu div.list-group>a .fa {
-  color: #5A55A3;
+  color: #5A7DFC;
 }
 .bhoechie-tab-container{
   width: 100%;
@@ -45,8 +45,8 @@ div.bhoechie-tab-menu div.list-group>a:last-child{
 div.bhoechie-tab-menu div.list-group>a.active,
 div.bhoechie-tab-menu div.list-group>a.active .glyphicon,
 div.bhoechie-tab-menu div.list-group>a.active .fa{
-  background-color: #5A55A3;
-  background-image: #5A55A3;
+  background-color: #83E5F9;
+  background-image: #83E5F9;
   color: #ffffff;
 }
 div.bhoechie-tab-menu div.list-group>a.active:after{
@@ -58,7 +58,7 @@ div.bhoechie-tab-menu div.list-group>a.active:after{
   border-left: 0;
   border-bottom: 13px solid transparent;
   border-top: 13px solid transparent;
-  border-left: 10px solid #5A55A3;
+  border-left: 10px solid #83E5F9;
 }
 
 div.bhoechie-tab-content{
@@ -71,3 +71,58 @@ div.bhoechie-tab-content{
 div.bhoechie-tab div.bhoechie-tab-content:not(.active){
   display: none;
 }
+
+
+
+.movies-container {
+    height: 230px;
+    width: 230px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.movie-poster {
+    height: 150px;
+    width: 150px;
+    display: block;
+}
+
+.movie-title {
+    display: block;
+}
+
+.movie-director {
+    display: block;
+}
+
+.book {
+    width: 150px !important;
+}
+
+.movies-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+
+.fgm-movie-align {
+    margin-bottom: 20px;
+}
+
+.filter-movies {
+    margin-bottom: 40px;
+}
+
+.navbar-fixed-top {
+    background-color: #83E5F9;
+    border-color: #83E5F9;
+
+}
+
+.navbar-fixed-top .navbar-brand {
+    color: white;
+}
+
+.navbar-fixed-top .navbar-nav > li > a {
+  color: white;
+    }

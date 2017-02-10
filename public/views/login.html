@@ -1,20 +1,5 @@
-<style>
-.heading
-{
-  width: 45%;
-    margin-bottom: 3%;
-    margin-top: 3%;
-    margin-left: 27%;
-    font-size: xx-large;
-}
-</style>  
-<div class="row content ">
-<div class="container">
-    <div class="row">
-    <button type="button" class="btn btn-primary btn-lg btn-block heading">Login</button>
-<div class="col-md-4" style="margin-left: 33%;
-">
-  
+<div class="col-md-4">
+  <h1>Login</h1>
   <div ng-show="error" class="alert alert-danger">{{errorMessage}}</div>
   <form class="form" ng-submit="login()">
     <div class="form-group">
@@ -26,12 +11,8 @@
         <input type="password" class="form-control" name="password" ng-model="loginForm.password" required>
       </div>
       <div>
-        <button type="submit" class="btn btn-primary" ng-disabled="disabled">Login</button>
-          <button type="submit" ng-click="sign" class="btn btn-primary" ng-disabled="disabled">SignUp</button>
-
+        <button id="hide" type="submit" class="btn btn-info" ng-disabled="disabled">Login</button>
       </div>
   </form>
-<!--   <a href="#/register">Signup</a> -->
-</div>
-</div>
+  <a href="#/register">Signup</a>
 </div>

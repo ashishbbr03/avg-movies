@@ -7,8 +7,7 @@ module.exports = function ($scope, $q, $location, AuthService) {
       // call logout from service
       AuthService.logout($q)
         .then(function () {
-         // $location.path('/login');
-         $location.path('/home');
+          $location.path('/login');
         });
 
     };

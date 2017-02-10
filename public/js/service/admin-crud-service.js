@@ -1,15 +1,16 @@
 
 'use strict';
-Theatre.$inject = ['$http'];
+AdminCRUDService.$inject = ['$http'];
 
-
-function Theatre($http){
+function AdminCRUDService($http){
    var _this = this;
-    _this.getTheatre = function () {
+
+   
+     _this.getData = function (serviceName) {
         
          return $http({
             method: 'GET',
-            url: '/theatre/gettheatre',            
+             url: `/${serviceName}/get${serviceName.substr(0,1).toUpperCase()+serviceName.substr(1)}`           
         })
         .then(function(response) {
             console.log(response);
@@ -21,12 +22,12 @@ function Theatre($http){
         });
     };
 
-    _this.addTheatre = function (data) {
-        //console.log($scope.theatre);
+    _this.addData = function (model, serviceName) {
+        
          return $http({
             method: 'POST',
-            url: '/theatre/addTheatre',
-            data: data,
+            url: `/${serviceName}/add${serviceName.substr(0,1).toUpperCase()+serviceName.substr(1)}`,
+            data: model,
 
         })
         .then(function(response) {
@@ -37,9 +38,10 @@ function Theatre($http){
         });
     };
 
-    _this.deleteTheatre = function (theatreID) {
-        //console.log($scope.theatre);
-          return $http.delete('/theatre/deleteTheatre/'+theatreID)
+    _this.deleteData = function (model, serviceName) {
+       
+        
+          return $http.delete(`/${serviceName}/delete${serviceName.substr(0,1).toUpperCase()+serviceName.substr(1)}/${model[`${serviceName}ID`]}` )
 
         .then(function(response) {
             return response.data;
@@ -49,11 +51,11 @@ function Theatre($http){
         });
     };
 
-     _this.editTheatre = function (theatreID) {
-        //console.log($scope.theatre);
+     _this.editData = function (model, serviceName) {
+        
           return $http({
             method: 'GET',
-            url: '/theatre/getTheatre/'+theatreID,            
+            url: `/${serviceName}/get${serviceName.substr(0,1).toUpperCase()+serviceName.substr(1)}/${model[`${serviceName}ID`]}`            
         })
         .then(function(response) {
             return response.data;
@@ -64,12 +66,12 @@ function Theatre($http){
         });
     };
 
-    _this.updateTheatre = function (theatre) {
-        console.log(theatre);
+    _this.updateData = function (model, serviceName) {
+        
           return $http({
             method: 'PUT',
-            url: '/theatre/updateTheatre/'+theatre._id,  
-            data: theatre          
+            url: `/${serviceName}/update${serviceName.substr(0,1).toUpperCase()+serviceName.substr(1)}/${model[`${serviceName}ID`]}`,  
+            data: model          
         })
         .then(function(response) {
             return response.data;
@@ -80,5 +82,7 @@ function Theatre($http){
         });
     };
 }
-module.exports = Theatre;
+
+
+module.exports = AdminCRUDService;
    

@@ -1,23 +1,18 @@
 'use strict';
 
 module.exports = function ($scope, $q, $location, AuthService) {
-var vm = this;
 
-$scope.sign=function () {
-  $location.path('/register');
-}
     $scope.login = function () {
 
       // initial values
       $scope.error = false;
-      $scope.disabled = true;  //not enable
+      $scope.disabled = true;
 
       // call login from service
       AuthService.login($scope.loginForm.username, $scope.loginForm.password, $q)
         // handle success
         .then(function () {
-        $location.path('/admin');
-           
+          $location.path('/');
           $scope.disabled = false;
           $scope.loginForm = {};
         })
@@ -28,6 +23,17 @@ $scope.sign=function () {
           $scope.disabled = false;
           $scope.loginForm = {};
         });
+
+        $(document).ready(function(){
+          if ($scope.loginForm.username && $scope.loginForm.password  == admin){
+              $("#hide").click(function(){
+                $("nav1 navbar-nav navbar-right").hide();
+        });
+      };
+        // $("#show").click(function(){
+        //     $("p").show();
+        // });
+    });
 
     };
 

@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function($scope, $http) {
-  $scope.home = 'home';
+  $scope.user = 'user';
 
  var refresh = function () {
         $http.get('/movie/getMovie').success(function (response) {

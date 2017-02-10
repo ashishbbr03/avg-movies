@@ -1,15 +1,15 @@
 
 'use strict';
-City.$inject = ['$http'];
+Time.$inject = ['$http'];
 
 
-function City($http){
+function Time($http){
    var _this = this;
-    _this.getCity = function () {
+    _this.getTime = function () {
 
          return $http({
             method: 'GET',
-            url: '/city/getcity',
+            url: '/time/gettime',
         })
         .then(function(response) {
             console.log(response);
@@ -21,11 +21,11 @@ function City($http){
         });
     };
 
-    _this.addCity = function (data) {
-        //console.log($scope.city);
+    _this.addTime = function (data) {
+        //console.log($scope.time);
          return $http({
             method: 'POST',
-            url: '/city/addCity',
+            url: '/time/addTime',
             data: data,
 
         })
@@ -37,9 +37,9 @@ function City($http){
         });
     };
 
-    _this.deleteCity = function (cityID) {
-        //console.log($scope.city);
-          return $http.delete('/city/deleteCity/'+cityID)
+    _this.deleteTime = function (timeID) {
+        //console.log($scope.time);
+          return $http.delete('/time/deleteTime/'+timeID)
 
         .then(function(response) {
             return response.data;
@@ -49,11 +49,11 @@ function City($http){
         });
     };
 
-     _this.editCity = function (cityID) {
-        //console.log($scope.city);
+     _this.editTime = function (timeID) {
+        //console.log($scope.time);
           return $http({
             method: 'GET',
-            url: '/city/getCity/'+cityID,
+            url: '/time/getTime/'+timeID,
         })
         .then(function(response) {
             return response.data;
@@ -64,12 +64,12 @@ function City($http){
         });
     };
 
-    _this.updateCity = function (city) {
-        console.log(city);
+    _this.updateTime = function (time) {
+        console.log(time);
           return $http({
             method: 'PUT',
-            url: '/city/updateCity/'+city._id,
-            data: city
+            url: '/time/updateTime/'+time._id,
+            data: time
         })
         .then(function(response) {
             return response.data;
@@ -80,4 +80,4 @@ function City($http){
         });
     };
 }
-module.exports = City;
+module.exports = Time;

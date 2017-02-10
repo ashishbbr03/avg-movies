@@ -1,84 +1,83 @@
 
 'use strict';
-Theatre.$inject = ['$http'];
+Book.$inject = ['$http'];
 
 
-function Theatre($http){
+function Book($http){
    var _this = this;
-    _this.getTheatre = function () {
-        
+    _this.getBook = function () {
+
          return $http({
             method: 'GET',
-            url: '/theatre/gettheatre',            
+            url: '/book/getbook',
         })
         .then(function(response) {
             console.log(response);
             return response.data;
         })
         .catch(function(error) {
-           
+
             throw error;
         });
     };
 
-    _this.addTheatre = function (data) {
-        //console.log($scope.theatre);
+    _this.addBook = function (data) {
+        //console.log($scope.book);
          return $http({
             method: 'POST',
-            url: '/theatre/addTheatre',
+            url: '/book/addBook',
             data: data,
 
         })
         .then(function(response) {
             return response.data;
         })
-        .catch(function(error) {           
+        .catch(function(error) {
             throw error;
         });
     };
 
-    _this.deleteTheatre = function (theatreID) {
-        //console.log($scope.theatre);
-          return $http.delete('/theatre/deleteTheatre/'+theatreID)
+    _this.deleteBook = function (bookID) {
+        //console.log($scope.book);
+          return $http.delete('/book/deleteBook/'+bookID)
 
         .then(function(response) {
             return response.data;
         })
-        .catch(function(error) {            
+        .catch(function(error) {
             throw error;
         });
     };
 
-     _this.editTheatre = function (theatreID) {
-        //console.log($scope.theatre);
+     _this.editBook = function (bookID) {
+        //console.log($scope.book);
           return $http({
             method: 'GET',
-            url: '/theatre/getTheatre/'+theatreID,            
+            url: '/book/getBook/'+bookID,
         })
         .then(function(response) {
             return response.data;
         })
         .catch(function(error) {
-           
+
             throw error;
         });
     };
 
-    _this.updateTheatre = function (theatre) {
-        console.log(theatre);
+    _this.updateBook = function (book) {
+        console.log(book);
           return $http({
             method: 'PUT',
-            url: '/theatre/updateTheatre/'+theatre._id,  
-            data: theatre          
+            url: '/book/updateBook/'+book._id,
+            data: book
         })
         .then(function(response) {
             return response.data;
         })
         .catch(function(error) {
-           
+
             throw error;
         });
     };
 }
-module.exports = Theatre;
-   
+module.exports = Book;
