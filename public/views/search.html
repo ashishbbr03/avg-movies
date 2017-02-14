@@ -1,0 +1,287 @@
+<!-- <div class="row content ">
+<div>
+<div>
+
+<button class="btn btn-primary" ng-repeat="st in stObj" ng-click="seat()">{{st.availableseats}}</button></div>
+<div>
+
+<button  class="btn btn-success" ng-repeat="st in stObj" ng-click="seat()">{{st.reservedSeats}}</button>
+    </div>
+    </div>
+    </div> -->
+<!--
+<style>
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+ng-repeat="st in stObj"
+body {
+  padding: 0;
+  font-family: 'Roboto', serif;
+}
+
+.padding-right {
+  padding-right: 10px;
+}
+
+.padding-bottom {
+  padding-bottom: 10px;
+}
+
+.padding-left {
+  padding-left: 10px;
+}
+
+.title {
+  margin-bottom: 50px;
+}
+
+/* Custom page footer */
+.footer {
+  position: fixed;
+  width: 100%;
+  padding: 10px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+  text-align: center;
+  bottom: 0;
+  margin-top: 20px;
+}
+
+/* seat reservation */
+.content {
+  text-align: center;
+}
+
+.seatLayout {
+  margin: 30px auto;
+}
+
+.seat {
+  cursor: pointer;
+}
+
+.buttons {
+  margin: 30px auto;
+}
+
+.legend img{
+  vertical-align: bottom;
+}
+
+
+</style>
+<div class="content">
+    <table class="seatLayout">
+    <div class="legend">
+        <img src="../resources/images/W_chair.gif">  Available
+        <img src="../resources/images/R_chair.gif" class="padding-left">  Booked
+        <img src="../resources/images/G_chair.gif" class="padding-left">  Selected
+    </div>
+    <tbody>
+        <tr>
+            <td class="padding-bottom"></td>
+            <td class="padding-bottom" ng-repeat="col in cols track by $index" ng-bind="col"></td>
+        </tr>
+        <tr ng-repeat="row in rows">
+            <td class="padding-right" ng-bind="row"></td>
+            <td class="seat" ng-repeat="col in cols" ng-click="seatClicked(row + col)" ng-switch on="getStatus(row + col)" style="padding: 5px 5px 5px 5px;">
+                <img ng-switch-when="selected" src="../resources/images/G_chair.gif">
+                <img ng-switch-when="reserved" src="../resources/images/R_chair.gif">
+                <img ng-switch-default src="../resources/images/W_chair.gif">
+            </td>
+        </tr>
+
+
+
+        </tbody>
+
+    </table>
+ <div><img src="../resources/images/p3_r1_c1.jpg"></div>
+
+
+
+
+    <div class="buttons">
+        <button ng-click="clearSelected()">Clear</button>
+        <button ng-click="showSelected()">Show selected seats!</button>
+    </div>
+<div id="cnt">
+
+</div>
+<div id="amt"></div>
+</div>
+ -->
+
+
+
+<!--
+
+ <div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="table-responsive">
+        <table class="table-default">
+          <tr>
+            <td><h4>Your City </h4></td>
+              <td><select ng-model="dataCity" class="form-control">
+                <option ng-repeat="n in theaterShow | unique : 'T_City'">{{n.T_City}}<option>
+            </select></td>
+          </tr>
+
+          </table>
+        </div>
+            <br><br>
+            <div class="table-responsive">
+              <table class="table-default" >
+            <tr>
+              <td><h4>Choose Date </h4></td>
+              <td><select ng-model="myDate" class="form-control">
+            <option ng-repeat="x in movDates">{{x  | date:'dd, MMM yyyy'}}</option>
+        </select></td>
+
+            </tr>
+          </table>
+        </div>
+
+<br><br><br><br><br><br>
+
+
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr class="danger">
+
+      <h5><th>Theater</th></h5>
+      <h5><th>Movie</th></h5>
+        <h5><th>City</th></h5>
+        <h5><th>Show Dates</th></h5>
+        <h5><th>Show Timings</th></h5>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-show="myDate" ng-repeat="x in mappingData | filter:myDate | filter:dataCity" class="success">
+        <td>{{x.Cinema}}</td>
+        <td>{{x.Title}}</td>
+        <td>{{x.City}}</td>
+        <td>{{x.ShowDate | date:'dd, MMMM yyyy' }}</td>
+        <td ng-repeat="a in x.TimeSlot"><button type="button" class="btn btn-link" ng-click="showTimings(a,x)">{{a}}</button></td>
+      </tr>
+  </tbody>
+  </table>
+
+</div>
+</div>
+<!-- </div> -->
+
+<!--
+
+<div class="container">
+<div class="row">
+  <div class="well" style="width:500px;margin-top: 10%;">
+
+    <select class="" id="noofseats">
+    <option>Tickets</option>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>7</option>
+      <option>8</option>
+      <option>9</option>
+      <option>10</option>
+    </select>
+
+</div>
+
+<div class="col-sm-8">
+  <h2 class="strip"><center>Seat Arrangement</center></h2>
+</div>
+</div>
+
+  <div class="row">
+
+    <div class="col-sm-8">
+
+      <div class="table-responsive">
+<table class="table table-default" id="ss">
+<tr>
+<td><div class="floating-box" id="A1">A1</div></td>
+<td><div class="floating-box" id="A2">A2</div></td>
+<td><div class="floating-box" id="A3">A3</div></td>
+<td><div class="floating-box" id="A4">A4</div></td>
+<td><div class="floating-box" id="A5">A5</div></td>
+<td><div class="floating-box" id="A6">A6</div></td>
+<td><div class="floating-box" id="A7">A7</div></td>
+<td></td>
+
+</tr>
+<tr>
+
+<td><div class="floating-box" id="B1">B1</div></td>
+<td><div class="floating-box" id="B2">B2</div></td>
+<td><div class="floating-box" id="B3">B3</div></td>
+<td><div class="floating-box" id="B4">B4</div></td>
+<td><div class="floating-box" id="B5">B5</div></td>
+<td><div class="floating-box" id="B6">B6</div></td>
+<td><div class="floating-box" id="B7">B7</div></td>
+  <td></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td><div class="floating-box" id="C1">C1</div></td>
+<td><div class="floating-box" id="C2">C2</div></td>
+<td><div class="floating-box" id="C3">C3</div></td>
+<td><div class="floating-box" id="C4">C4</div></td>
+<td><div class="floating-box" id="C5">C5</div></td>
+
+</tr>
+
+
+</table>
+</div>
+</div>
+</div>
+<div class="col-sm-4">
+<div class="table-responsive">
+
+
+<table class="table table-default">
+<tr><td><h4 class="h">Total Amount : <p id="amt" ></p></h4></td></tr>
+<tr><td><h4 class="h">Seats Selected : <p id="st"></p></h4></td></tr>
+<tr><td><h4 class="h">Total Seats : <p id="totalst"></p></h4></td></tr>
+<tr><td><button type="button" class="btn btn-primary btn-lg btn-block" ng-click="nextPage()">Proceed to Pay</button></td></tr>
+</table>
+</div>
+</div>
+</div>
+
+<div class="col-sm-4">
+
+
+</div>
+</div>
+<div class="row">
+<div class="col-sm-8">
+  <h4 class="screen"><center>Screen This Way</center></h4>
+</div>
+</div>
+</div>
+
+
+
+ <table class="table" ng-init="s;ar" style="margin-top: 10%;">
+            <tbody>
+   <tr class="tablestyle"><th>MovieName</th>   <td><input id="one" value="{{s}}"></td></tr>
+ <tr class="tablestyle"> <th>Rating</th><td><input id="two" value="{{ar}}"></td></tr>
+ <tr><td><button  ng-click="add()" id="myBtn" class="btn btn-primary">Add</button><td></tr>
+ </tbody>
+ </table>-->

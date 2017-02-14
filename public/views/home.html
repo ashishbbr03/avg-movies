@@ -1,60 +1,183 @@
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-    <li data-target="#myCarousel" data-slide-to="3"></li>
+<style>
 
-  </ol>
+.searchbox
+{
+  height: 30px;
+    width: 81%;
+    border: 6px;
+    border-radius: 4px;
+}
 
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
-    <div class="item active">
-      <img src="../pics/3.jpg" >
+.search
+{
+  margin-top: -16%;
+    margin-left: 7%;
+}
+/* img below banner*/
+.movieshomepage {
+    margin: 80px 0px 80px 0px;
+    }
 
-    </div>
+.movieshomepage {
+    margin: 10px 10px 10px 10px;
+    -webkit-transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    transform: scale(1, 1);
+    transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s; /* Safari */
+    }
 
-    <div class="item">
-      <img src="../pics/2.jpg" >
-    </div>
+.movieshomepage:hover {
+    position: relative;
+  cursor: pointer;
+  -webkit-transform: scale(2, 2);
+    -ms-transform: scale(2, 2);
+    transform: scale(1.2, 1.2);
+        border-radius: 10px;
+    transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s; /* Safari */
+    box-shadow: 5px 5px 5px 5px #888888;
+    z-index: 1;
+    }
+.button {
+  border-radius: 4px;
+  background-color: #337ab7;
+  border: none;
+  color: #FFFFFF;
+  width: 140px;
+  transition: all 0.5s;
+  cursor: pointer;
+      padding: 6px 12px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+        border: 1px solid transparent;
+    margin-left: 44%;
+}
 
-    <div class="item">
-      <img src="../pics/1.jpg" >
-    </div>
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
 
-    <div class="item">
-      <img src="../pics/4.jpg" >
-    </div>
+.button span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
 
-  </div>
+.button:hover span {
+  padding-right: 25px;
+}
 
-  <!-- Left and right controls -->
-  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+#search
+{
+
+    background-image: url("paper.gif");
+
+}
+.sub-menu {
+    padding: 0;
+    border: 1px solid black;
+        position: absolute;
+    overflow-y: auto;
+}
+.col-md-6 {
+    width: 52%;
+}
+
+
+.thumbnail {
+    position:relative;
+    overflow:hidden;
+    border-style: hidden;
+}
+
+.caption {
+    position:absolute;
+    top:-100%;
+    right:0;
+    background:rgba(66, 139, 202, 0.75);
+    width:100%;
+    height:100%;
+    padding:2%;
+    text-align:center;
+    color:#fff !important;
+    z-index:2;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+.thumbnail:hover .caption {
+    top:0%;
+}
+</style>
+
+</style>
+
+ <header>
+  <img class="banner-img" src="../resources/images/BANNER.jpg"/>
+  <div class="search">
+            <div class="col-md-10 col-md-offset-1" >
+
+        <div ng-show="query" style="  background-color: white; margin-top: 5%; width: 47%; margin-left: 18%;border-radius: 4px;" class="sub-menu">
+
+ </div>
+                      </div>
+                      </div>
+  </header>
+
+
+<div class="row content ">
+<div class="col-md-12">
+<div class="row">
+<div class="col-md-3" style="margin-top: 14%;    margin-left: 4%;">
+<button type="button" class="btn btn-primary  btn-lg btn-block" style="margin-bottom: 3%;">MOVIES RATINGS</button>
+<div>
+
+  <ul class="list-group" ng-repeat="moviess in movieObj">
+    <li class="list-group-item">{{moviess.Title}} <span class="badge" style="background-color: #337ab7;">{{moviess.avg}}%</span></li>
+  </ul>
 </div>
 
+        </div>
+    <div class="col-md-8"  style="margin-top: 14%;">
 
+  <button type="button" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 3%;">MOVIES NOW</button>
 
+        <div class="col-xs-6 col-sm-3 col-md-4" ng-repeat="moviess in movieObj| filter:query">
+                <div class="thumbnail" >
+                <div class="caption">
 
-<br>
+                    <h3 style="margin-top: 70px;" >{{moviess.Title}}</h3>
+                    <p class="lead" style="margin-top: 18px;" >{{moviess.Year}} {{moviess.Language}}</p>
+                    <a class="btn btn-primary" ng-click="Booking(moviess)" >Book</a>
+                 <a class="btn btn-success" ng-click="Review(moviess)">Review</a>
+                </div>
+<img src="{{moviess.Poster}}" style="width: 280px;height: 280px;" alt="...">
 
+        </div>
+        </div>
+ </div>
+ <div class="col-md-1">
 
+</div>
 
-
-
-
-<div class="movies-wrapper">
-    <div class="movies-container" ng-repeat="movie in movieList">
-        <img class="movie-poster" ng-src={{movie.moviPoster}} />
-        <span class="movie-title">Title : {{movie.moviTitle}}</span>
-        <span class="movie-title">Director : {{movie.moviDirector}}</span>
-        <button onclick="location.href='#/book'"  class="button-color book btn btn-info"> BOOK </button>
-    </div>
+           </div>
+</div>
+</div>
 </div>

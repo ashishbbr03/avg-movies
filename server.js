@@ -4,11 +4,11 @@ var express = require('express');
 var app = express();
 var bodyParser=require('body-parser');
 var path = require('path');
-var cookieParser = require('cookie-parser');
-var expressValidator = require('express-validator');
-var flash = require('connect-flash');
-var session = require('express-session');
-var passport = require('passport');
+var cookieParser = require('cookie-parser');//auth
+var expressValidator = require('express-validator');//auth
+var flash = require('connect-flash');//auth
+var session = require('express-session');//auth
+var passport = require('passport');//auth
 var localStrategy = require('passport-local').Strategy;
 
 // user schema/model
@@ -17,6 +17,7 @@ var User = require('./models/user.js');
 //Database
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
+
 var dbHost = 'mongodb://localhost:27017/test';
 mongoose.connect(dbHost);
 
@@ -25,14 +26,21 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(){
   console.log("Connected to DB");
 });
-
+var r=require('./routes/reviewRoute');
+var avgratingcrud=require('./routes/avgrating');
 var auth =  require('./routes/auth');
 var movieCrud = require('./routes/movie-crud');
 var cityCrud = require('./routes/city-crud');
-var theatreCrud = require('./routes/theatre-crud');
-var showDateCrud = require('./routes/assm-crud');
-var showTimeCrud = require('./routes/time-crud');
-var bookcrud = require('./routes/book-crud');
+//var theatreCrud = require('./routes/theatre-crud');
+var movieInfo=require('./routes/movieInfo');
+//var cityCrud = require('./routes/city-crud');
+var threaterCrud=require('./routes/threater-crud');
+var timing=require('./routes/showtime');
+var booking=require('./routes/booking-crud');
+var reviews=require('./routes/review-crud');
+var searchCrud=require('./routes/search-crud');
+var confirmCrud=require('./routes/confim-crud');
+var seatmappingCrud=require('./routes/timemapping-crud');
 
 
 // BodyParser Middleware
@@ -53,17 +61,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
+app.use('/reviewapi', r);
 app.use('/movie', movieCrud);
 app.use('/city', cityCrud);
-app.use('/thtr', theatreCrud);
-app.use('/assm', showDateCrud);
+//app.use('/theatre', theatreCrud);
 app.use('/user/', auth);
-app.use('/time', showTimeCrud);
-app.use('/book',bookcrud);
+app.use('/threater',threaterCrud);
+app.use('/showtiming',timing);
+app.use('/movieinfo',movieInfo);
+app.use('/bk',booking);
+app.use('/cmt',reviews);
+app.use('/search',searchCrud);
+app.use('/pay',confirmCrud);
+app.use('/st',seatmappingCrud);
+app.use('/avg',avgratingcrud);
 
 
-
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, '../client', 'index.html'));
+});
 
 // Only load this middleware in dev mode (important).
 if (app.get('env') === 'development') {
@@ -83,6 +99,7 @@ if (app.get('env') === 'development') {
   }));
 
 }
+
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;

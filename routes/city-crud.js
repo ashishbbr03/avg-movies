@@ -13,62 +13,80 @@ var mongoose = require('mongoose');
 
 
 
+
 var citySchema = mongoose.Schema({
-    cityID: String,
-    cityName: String
+  cityID:String,
+    cityName: String,
+    // cityRating:String
  });
 var City = mongoose.model('City', citySchema, 'city');
 
 
 
 //Master
-  router.get('/getCity', function (req, res) {
+  router.get('/city', function (req, res) {
+
     console.log("REACHED city GET FUNCTION ON SERVER");
     City.find({}, function (err, docs) {
          res.json(docs);
     });
 });
 
-  router.get('/getCity/:id', function (req, res) {
+
+router.get('/city/:id', function (req, res) {
+
     console.log("REACHED GET ID FUNCTION ON SERVER");
-    console.log(req.params.id);
-     City.find({cityID: req.params.id}, function (err, docs) {
+     City.find({_id: req.params.id}, function (err, docs) {
          res.json(docs);
 
     });
 });
 
-router.post('/addCity', function(req, res){
+router.post('/city', function(req, res){
   console.log(req.body);
   var id = req.body.cityID;
   var name = req.body.cityName;
+  var rating= req.body.cityRating
   var city = new City({
     cityID : id,
-    cityName:name
+   cityName:name,
+   cityRating:rating
   });
 
   city.save(function(err, docs){
+
     if ( err ) throw err;
+    console.log(id);
     console.log("Book Saved Successfully");
     res.json(docs);
   });
 
   })
 
-router.delete('/deleteCity/:id', function(req, res){
+router.delete('/city/:id', function(req, res){
+
    console.log("REACHED Delete FUNCTION ON SERVER");
-   console.log(req.params.id);
-      City.remove({cityID:req.params.id}, function(err, docs){
+
+      City.remove({_id:req.params.id}, function(err, docs){
         res.json(docs);
     });
 })
 
-router.put('/updateCity/:id', function(req, res){
+router.put('/city/:id', function(req, res){
+
     console.log("REACHED PUT");
     console.log(req.body);
-    City.findOneAndUpdate({cityID:req.params.id}, req.body, function (err, data) {
+    City.findOneAndUpdate({_id:req.params.id}, req.body, function (err, data) {
       res.json(data);
     });
 })
 
-  module.exports = router;
+
+// catch 404 and forward to error handler
+router.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+module.exports = router;
